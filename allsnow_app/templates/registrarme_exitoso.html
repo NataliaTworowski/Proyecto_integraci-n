@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
+    <title>All Snow - Vive la nieve al máximo</title>
+    <link rel="stylesheet" href="{% static 'css/registrarme_exitoso.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+                <li><a href="#centros-asociados">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+        <h4><center>Bienvenido a All Snow. Inicia tu sesión porque ¡ya puedes comprar o arrendar tus productos favoritos!</center></h4>
+    </header>
+    <main>
+        <section class="hero">
+            <img src="{% static 'img/fondo.png' %}" alt="Paisaje de nieve">
+        </section>
+    </main>
+
+    <footer>
+        <div class="contacto">
+            <p class="negrita">CONTACTO</p>
+            <p>📞 +56971528690</p>
+            <p>✉️ allsnowcl@gmail.com</p>
+        </div>
+    </footer>
+    <script src="{% static 'css/scriptinicio.js' %}"></script>
+</body>
+</html>

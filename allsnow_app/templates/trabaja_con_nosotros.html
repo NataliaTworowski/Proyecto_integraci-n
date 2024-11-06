@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
+    <title>All Snow - Vive la nieve al máximo</title>
+    <link rel="stylesheet" href="{% static 'css/trabaja_con_nosotros.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+                <li><a href="#centros-asociados">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
+            </ul>
+            <div class="login">
+                <input type="email" placeholder="Correo electrónico">
+                <input type="password" placeholder="Contraseña">
+                <button class="button iniciar-sesion">Iniciar sesión</button>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <img src="{% static 'img/fondo.png' %}" alt="Paisaje de nieve">
+        </section>
+            <!-- Formulario de Solicitud de Tienda y Usuario -->
+            <section class="formulario-trabaja-con-nosotros" id="formularioTrabajaConNosotros">
+                <div class="form-container">
+                    <h2>Trabaja con Nosotros</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h3>Datos Usuario</h3>
+                                <p>{{ form_usuario.nombre.label_tag }} {{ form_usuario.nombre }}</p>
+                                <p>{{ form_usuario.apellido.label_tag }} {{ form_usuario.apellido }}</p>
+                                <p>{{ form_usuario.rut.label_tag }} {{ form_usuario.rut }}</p>
+                                <p>{{ form_usuario.telefono.label_tag}} {{ form_usuario.telefono }}</p>
+                                <p>{{ form_usuario.correo.label_tag }} {{ form_usuario.correo }}</p>
+                                <p>{{ form_usuario.contraseña.label_tag }} {{ form_usuario.contraseña }}</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h3>Datos Local</h3>
+                                <p>{{ form_local.nombre_local.label_tag }} {{ form_local.nombre_local }}</p>
+                                <p>{{ form_local.patente.label_tag }} {{ form_local.patente }}</p>
+                                <p>{{ form_local.ubicacion.label_tag }} {{ form_local.ubicacion }}</p>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="button bigbutton">Registrar Local</button>
+                    </form>
+                    <p>Al registrarte aceptas los términos y condiciones.</p>
+                </div>
+            </section>            
+        </div>
+    </main>
+    <footer>
+        <div class="contacto">
+            <p class="negrita">CONTACTO</p>
+            <p>📞 +56971528690</p>
+            <p>✉️ allsnowcl@gmail.com</p>
+        </div>
+    </footer>
+    <script src="{% static 'css/scriptinicio.js' %}"></script>
+</body>
+</html>

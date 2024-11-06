@@ -1,0 +1,243 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos del encabezado */
+header {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: gray;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.login {
+    display: flex;
+    gap: 10px;
+}
+
+.login input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.login button {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Estilos del héroe */
+.hero {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 60px; /* Compensar la altura del encabezado */
+}
+
+.hero img {
+    width: 100%;
+    height: 82vh;
+    object-fit: cover;
+}
+
+.form-container-wrapper {
+    display: flex; 
+    flex-wrap: wrap; /* Permite que los formularios se ajusten en varias líneas */
+    justify-content: center; /* Centra los formularios */
+    gap: 10px; /* Espacio entre los formularios */
+}
+
+/* Asegúrate de que los formularios estén configurados correctamente */
+
+
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    overflow: auto;
+    width: 80%; 
+    max-width: 400px; 
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form-container form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* NUEVOS ESTILOS PARA EL FORMULARIO DE "TRABAJA CON NOSOTROS" */
+.form-row {
+    display: flex; 
+    justify-content: space-between;
+   
+}
+
+.form-group {
+    width: 48%; /* Ajusta para que ambos grupos estén uno al lado del otro */
+}
+
+.form-container form input,
+.form-container form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.form-container h3 {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.iniciar-sesion {
+    background-color: #4CAF50; /* Verde */
+    padding: 10px; /* Ajusta el padding según lo que necesites */
+    border-radius: 5px; /* Radio de borde específico */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Ajusta el tamaño de fuente */
+}
+
+.bigbutton {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Asegura que el último elemento no tenga margen extra */
+.datos-local input:last-child,
+.datos-local select:last-child {
+    margin-right: 0; /* Elimina margen del último elemento */
+}
+
+.form-container p {
+    font-size: 12px;
+    color: gray;
+    margin-top: 10px;
+}
+
+/* Estilos del pie de página */
+footer {
+    background-color: #00ADEF;
+    color: white;
+    text-align: center;
+    padding: 10px 10;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.contacto p {
+    margin: 5px 0;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .login {
+        flex-direction: column;
+    }
+
+    .form-row {
+        flex-direction: column; /* Cambia a vertical en pantallas pequeñas */
+    }
+
+    .form-group {
+        width: 100%; /* Cada grupo ocupa todo el ancho */
+    }
+
+    .form-container {
+        width: 90%; /* Ancho más flexible para el contenedor del formulario */
+        max-width: none; /* Elimina el max-width en pantallas pequeñas */
+        padding: 15px; /* Ajusta el padding */
+    }
+
+    .form-container form {
+        gap: 8px; /* Reduce el espacio entre elementos */
+    }
+
+    .form-container p {
+        font-size: 10px; /* Reduce el tamaño de la fuente para las notas */
+    }
+
+    .bigbutton, .iniciar-sesion {
+        padding: 8px; /* Ajusta el padding de los botones */
+        font-size: 14px; /* Ajusta el tamaño de la fuente de los botones */
+    }
+}

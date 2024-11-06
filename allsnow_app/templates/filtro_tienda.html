@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtro de Tiendas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/filtro_tienda.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+            All Snow
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Centros asociados</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Trabaja con nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Registrarme</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Filtra las Tiendas</h2>
+        <form method="get" action="{% url 'filtro_tienda' %}">
+            <!-- Filtro por Región -->
+            <div class="form-group">
+                <label for="region">Selecciona la Región:</label>
+                <select name="region" id="region" class="form-control">
+                    <option value="">Seleccionar región</option>
+                    {% for key, value in regiones %}
+                        <option value="{{ key }}" {% if selected_region == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Filtro por Nombre de Tienda -->
+            <div class="form-group">
+                <label for="nombre">Buscar Tienda por Nombre:</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la tienda..." value="{{ nombre }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+        </form>
+
+        <!-- Resultados de las Tiendas Filtradas -->
+        {% if request.GET %}
+            <h3 class="mt-4">Resultados</h3>
+            <div class="list-group">
+                {% if tiendas %}
+                    {% for tienda in tiendas %}
+                        <a href="{% url 'tienda_detalle' tienda.id_tienda %}" class="list-group-item list-group-item-action">
+                            <h5>{{ tienda.nombre_tienda }}</h5>
+                            <p>Ubicación: {{ tienda.ubicacion }}</p>
+                            <p>Región: {{ tienda.region }}</p>
+                            <p>Estado de Suscripción: {{ tienda.estado_suscripcion }}</p>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <p>No se encontraron tiendas con los filtros seleccionados.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Contacto:</strong> <br> 
+                Teléfono:📞+56923917032 <br> 
+                Correo: ✉️allsnowcl@gmail.com
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inventario Arriendo{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario ventas</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Enlace al CSS s -->
+    <link rel="stylesheet" href="{% static 'css/inventario_arriendo.css' %}">
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-center">Inventario Arriendo</h3>
+        </div>
+        <div class="card-body">
+            <!-- Tabla de Inventario de Arriendo -->
+            <div class="inventory-section">
+                <table id="rentalInventoryTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID de Producto</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad Disponible</th>
+                            <th>Talla Producto</th>
+                            <th>Precio de Arriendo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for InventarioArriendo in productos %}
+                        <tr>
+                            <td>{{ InventarioArriendo.id_producto }}</td>
+                            <td>{{ InventarioArriendo.nombre_producto }}</td>
+                            <td>{{ InventarioArriendo.cantidad_disponible }}</td>
+                            <td>{{ InventarioArriendo.talla_producto }}</td>
+                            <td>${{ InventarioArriendo.precio_arriendo|floatformat:0 }} CLP</td>
+                            <td>
+                                <form method="POST" action="{% url 'eliminar_producto_arriendo' InventarioArriendo.id_producto %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
+                                </form>  
+                                <button type="button" class="btn btn-warning" onclick="llenarModalDeEdicion(this)">Editar</button>                              
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Botones de Acción -->
+                <div class="button-group mt-4 text-right">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#rentalProductModal">Agregar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-group mt-5 text-right">
+        <a href="{% url 'inventario_ventas' %}" class="btn btn-primary">Inventario de Ventas</a>
+    </div>
+</section>
+
+<!-- Modal para Agregar Productos de Arriendo -->
+<div class="modal fade" id="rentalProductModal" tabindex="-1" role="dialog" aria-labelledby="rentalProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentalProductModalLabel">Agregar Producto de Arriendo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addRentalProductForm" method="POST" action="{% url 'agregar_productos_arriendo' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombreProductoArriendo">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nombreProducto" name="nombre_producto" required>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="cantidadDisponibleArriendo">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidadDisponibleArriendo" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tallaProductoArriendo">Talla</label>
+                        <select class="form-control" id="tallaProductoArriendo" name="talla_producto" required>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="precioArriendo">Precio de Arriendo</label>
+                        <input type="number" class="form-control" id="precioArriendo" name="precio_arriendo" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto de Arriendo</button>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Editar Productos de Arriendo -->
+<div class="modal fade" id="editRentalProductModal" tabindex="-1" role="dialog" aria-labelledby="editRentalProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRentalProductModalLabel">Editar Producto de Arriendo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editRentalProductForm" method="POST" action="{% url 'editar_producto_arriendo' %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="editRentalProductId" name="id_producto">
+                    <div class="form-group">
+                        <label for="editNombreProductoArriendo">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="editNombreProductoArriendo" name="nombre_producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCantidadDisponibleArriendo">Cantidad</label>
+                        <input type="number" class="form-control" id="editCantidadDisponibleArriendo" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTallaProductoArriendo">Talla</label>
+                        <select class="form-control" id="editTallaProductoArriendo" name="talla_producto" required>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrecioArriendo">Precio de Arriendo</label>
+                        <input type="number" class="form-control" id="editPrecioArriendo" name="precio_arriendo" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-warning">Actualizar Producto de Arriendo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Script para manejar los eventos de edición y eliminación -->
+<script>
+    function llenarModalDeEdicion(button) {
+        var row = button.closest("tr"); // Encuentra la fila correspondiente
+        document.getElementById('editRentalProductId').value = row.cells[0].textContent.trim(); // ID de producto
+        document.getElementById('editNombreProductoArriendo').value = row.cells[1].textContent.trim(); // Nombre del producto
+        document.getElementById('editCantidadDisponibleArriendo').value = row.cells[2].textContent.trim(); // Cantidad disponible
+        document.getElementById('editTallaProductoArriendo').value = row.cells[3].textContent.trim(); // Talla
+        document.getElementById('editPrecioArriendo').value = row.cells[4].textContent.replace(/\D/g, '').trim(); // Precio
+        $('#editRentalProductModal').modal('show'); // Mostrar modal
+    }
+</script>
+
+
+{% endblock %}

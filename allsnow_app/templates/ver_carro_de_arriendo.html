@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario ventas</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Enlace al CSS específico para inventario ventas -->
+    <link rel="stylesheet" href="{% static 'css/ver_carro_de_compras.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Carro de Compras</h2>
+
+    {% if productos_carrito %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos_carrito %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>${{ producto.subtotal }}</td>
+                    <td>
+                        {% if producto.producto_id %}
+                        <form method="post" action="{% url 'eliminar_producto_arriendo' producto.producto_id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </form>
+                        {% else %}
+                        <span>No disponible</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4>Total: ${{ total_precio }}</h4>
+    {% else %}
+        <p>No hay productos en el carrito.</p>
+    {% endif %}
+
+    <a href="{% url 'interfaz_arriendo' id_tienda %}" class="btn btn-primary mt-3">Seguir comprando</a>
+</div>
+</body>
+</html>
+{% endblock %}

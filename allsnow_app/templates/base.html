@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Allsnow{% endblock %}</title>
+   
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+            All Snow
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Centros asociados</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Trabaja con nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Registrarme</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="container" style="margin-top: 70px; display: flex; justify-content: center;">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Pie de Página -->
+    <footer class="footer mt-4">
+        <div class="container text-center">
+            <p><strong>Contacto:</strong><br> 
+                Teléfono: 📞 +56923917032 <br> 
+                Correo: ✉️ allsnowcl@gmail.com
+            </p>
+        </div>
+    </footer>
+
+    <!-- AdminLTE Script -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inventario Ventas{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario ventas</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Enlace al CSS específico para inventario ventas -->
+    <link rel="stylesheet" href="{% static 'css/inventario_arriendo.css' %}">
+</head>
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-center">Inventario Ventas</h3>
+        </div>
+        <div class="card-body">
+            <!-- Tabla de Inventario -->
+            <div class="inventory-section">
+                <table id="inventoryTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID de Producto</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad Disponible</th>
+                            <th>Talla Producto</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inventario in productos %}
+                        <tr>
+                            <td>{{ inventario.id_producto }}</td>
+                            <td>{{ inventario.nombre_producto }}</td>
+                            <td>{{ inventario.cantidad_disponible }}</td>
+                            <td>{{ inventario.talla_producto }}</td>
+                            <td>${{ inventario.precio|floatformat:0 }} CLP</td>
+                            <td>
+                                <!-- Botón de eliminar -->
+                                <form method="POST" action="{% url 'eliminar_productos' inventario.id_producto %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
+                                </form>
+                                <!-- Botón de editar con función para llenar el modal -->
+                                <button type="button" class="btn btn-warning" onclick="llenarModalDeEdicion(this)">Editar</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Botones de Acción -->
+                <div class="button-group mt-4 text-right">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#productModal">Agregar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-group mt-5 text-right">
+        <a href="{% url 'inventario_arriendo' %}" class="btn btn-primary">Inventario de Arriendos</a>
+    </div>
+</section>
+
+<!-- Modal para Agregar Productos -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Agregar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para agregar productos -->
+                <form id="addProductForm" method="POST" action="{% url 'agregar_productos' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombreProducto">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nombreProducto" name="nombre_producto" required>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="cantidadDisponible">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidadDisponible" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tallaProducto">Talla</label>
+                        <select class="form-control" id="tallaProducto" name="talla_producto" required>
+                            <!-- Opciones de talla -->
+                            <option value="XS">XS</option>
+                            <!-- más opciones -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Editar Productos -->
+<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Editar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm" method="POST" action="{% url 'editar_producto' %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="editProductId" name="id_producto">
+                    <div class="form-group">
+                        <label for="editNombreProducto">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="editNombreProducto" name="nombre_producto" required>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="editCantidadDisponible">Cantidad</label>
+                        <input type="number" class="form-control" id="editCantidadDisponible" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTallaProducto">Talla</label>
+                        <select class="form-control" id="editTallaProducto" name="talla_producto" required>
+                            <option value="XS">XS</option>
+                            <!-- más opciones -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrecio">Precio</label>
+                        <input type="number" class="form-control" id="editPrecio" name="precio" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-warning">Actualizar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Script para llenar el modal de edición -->
+<script>
+    function llenarModalDeEdicion(button) {
+        var row = button.closest("tr"); // Encuentra la fila correspondiente
+        document.getElementById('editProductId').value = row.cells[0].textContent.trim(); // ID de producto
+        document.getElementById('editNombreProducto').value = row.cells[1].textContent.trim(); // Nombre del producto
+        document.getElementById('editCantidadDisponible').value = row.cells[2].textContent.trim(); // Cantidad disponible
+        document.getElementById('editTallaProducto').value = row.cells[3].textContent.trim(); // Talla
+        document.getElementById('editPrecio').value = row.cells[4].textContent.replace(/\D/g, '').trim(); // Precio
+        $('#editProductModal').modal('show'); // Mostrar modal
+    }
+</script>
+
+
+{% endblock %}

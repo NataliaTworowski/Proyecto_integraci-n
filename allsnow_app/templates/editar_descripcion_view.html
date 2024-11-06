@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nombre_centro }}</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Enlace al CSS -->
+    <link rel="stylesheet" href="{% static 'css/editar_descripcion_view.css' %}">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menú Lateral -->
+            <aside class="col-md-3 col-lg-2 bg-light sidebar">
+                <div class="list-group mt-3">
+                    <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i> Trabajadores
+                    </a>
+                    <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-dollar-sign me-2"></i> Suscripción
+                    </a>
+                    <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-box me-2"></i> Inventario Ventas
+                    </a>
+                    <a href="{% url 'inventario_arriendo' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-box me-2"></i> Inventario Arriendos
+                    </a>
+                    <a href="{% url 'centro_rental_view' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Contenido Principal -->
+            <main class="col-md-9 col-lg-10">
+                <!-- Contenedor del título -->
+                <div class="title-container">
+                    <h1>{{ nombre_centro }}</h1>
+                </div>
+
+                <!-- Contenedor principal con la descripción y el formulario -->
+                <div class="content-container">
+                    <p class="description-text">
+                        <i class="bi-info-circle me-2"></i> 
+                        Por favor, proporciona una descripción clara y concisa para que los clientes sepan más sobre tu centro de rental.
+                    </p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_descripcion">Descripción:</label>
+                            <textarea id="id_descripcion" name="descripcion" class="form-control" rows="5">{{ form.descripcion.value }}</textarea>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-primary">Guardar Descripción</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- scripts de Bootstrap  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+</body>
+</html>
+{% endblock %}

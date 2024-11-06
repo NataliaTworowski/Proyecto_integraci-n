@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
+    <title>All Snow - Vive la nieve al máximo</title>
+    <link rel="stylesheet" href="{% static 'css/registrarme.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+                <li><a href="#centros-asociados">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <img src="{% static 'img/fondo.png' %}" alt="Paisaje de nieve">
+        </section>
+    
+        <div class="form-container-wrapper">
+            <!-- Formulario de Registro -->
+            <section class="formulario-registro" id="formularioRegistro">
+                <div class="form-container">
+                    <h2>Registrarme</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>{{ form_registrarme.nombre.label_tag }} {{ form_registrarme.nombre }}</p>
+                        <p>{{ form_registrarme.telefono.label_tag }} {{ form_registrarme.telefono }}</p>
+                        <p>{{ form_registrarme.correo.label_tag }} {{ form_registrarme.correo }}</p> 
+                        <p>{{ form_registrarme.contraseña.label_tag }} {{ form_registrarme.contraseña }}</p>
+                        <button type="submit" class="button bigbutton">Registrarme</button>
+                    </form>
+                    <p>Al registrarte aceptas los términos y condiciones.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="contacto">
+            <p class="negrita">CONTACTO</p>
+            <p>📞 +56971528690</p>
+            <p>✉️ allsnowcl@gmail.com</p>
+        </div>
+    </footer>
+    <script src="{% static 'css/scriptinicio.js' %}"></script>
+</body>
+</html>

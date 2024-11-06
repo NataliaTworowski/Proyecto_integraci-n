@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario ventas</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Enlace al CSS -->
+    <link rel="stylesheet" href="{% static 'css/interfaz_dueno.css' %}">
+    <style>
+        p {
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            white-space: normal; 
+        }
+        main {
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+    </style>
+</head>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Menú Lateral -->
+        <aside class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+            <div class="list-group mt-3">
+                <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Trabajadores
+                </a>
+                <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-dollar-sign me-2"></i> Suscripción
+                </a>
+                <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-box me-2"></i> Inventario Ventas
+                </a>
+                <a href="{% url 'inventario_arriendo' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-box me-2"></i> Inventario Arriendos
+                </a>
+                <a href="{% url 'editar_descripcion_view' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-edit me-2"></i> Editar Tienda
+                </a>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-5">
+            <h2 class="text-center mt-3 font-weight-bold">{{ nombre_centro }}</h2>
+            <p class="text-center">{{ descripcion }}</p>
+            <p class="text-center">
+                <i class="fas fa-map-marker-alt me-2"></i> {{ ubicacion }}
+            </p>
+        </main>
+    </div>
+</div>
+{% endblock %}

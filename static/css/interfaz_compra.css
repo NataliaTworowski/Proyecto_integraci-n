@@ -1,0 +1,48 @@
+.navbar {
+    background-color: rgba(29, 127, 151, 0.7); 
+    width: 100%; 
+    position: fixed; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+.navbar a {
+    color: rgb(255, 255, 255) !important; 
+}
+
+.navbar-brand .logo {
+    height: 40px; 
+    width: auto; 
+    margin-right: 8px; 
+}
+
+/* CSS */
+.footer {
+    background-color: rgba(29, 127, 151, 0.7);
+    padding: 20px 0;          /* Espaciado interno del footer */
+    width: 100%;              /* Ocupar todo el ancho de la página */
+    margin-top: auto;         /* Dejar margen superior automático */
+}
+.btn-carrito {
+    background-color: black; /* Cambia el color del botón a negro */
+    color: white; /* Cambia el texto del botón a blanco */
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos la altura de la ventana */
+}
+.container {
+    flex: 1; /* Permite que el contenedor principal crezca para ocupar el espacio restante */
+}
+.footer {
+    background-color: rgba(29, 127, 151, 0.7);
+    padding: 20px 0; /* Espaciado interno del footer */
+    width: 100%; /* Asegura que el footer ocupe todo el ancho de la página */
+    position: relative; /* Para asegurarse de que se coloque correctamente */
+    bottom: 0; /* Asegura que el footer esté al final */
+}
+.btn-carrito {
+    background-color: black; /* Cambia el color del botón a negro */
+    color: white; /* Cambia el texto del botón a blanco */
+}

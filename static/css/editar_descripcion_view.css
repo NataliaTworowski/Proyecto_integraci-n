@@ -1,0 +1,116 @@
+.left-aligned {
+    position: absolute;
+    left: 0;
+    top: 20px; /* Ajusta este valor para posicionar los botones verticalmente */
+    margin-left: 10px; /* Ajusta este valor para dar algo de espacio a la izquierda si es necesario */
+}
+/* styles.css */
+.navbar {
+    background-color: rgba(29, 127, 151, 0.7); 
+    width: 100%; 
+    position: fixed; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+.navbar a {
+    color: rgb(255, 255, 255) !important; 
+}
+
+.navbar-brand .logo {
+    height: 40px; 
+    width: auto; 
+    margin-right: 8px; 
+}
+
+/* Footer styles */
+.footer {
+    background-color: rgba(29, 127, 151, 0.7); 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    padding: 20px 0; 
+    text-align: center; 
+    color: rgb(255, 255, 255) !important; 
+}
+
+/* Table header styles */
+#inventoryTable thead th {
+    background-color: #65bac5 !important;
+    color: white; 
+    text-align: center; 
+}
+
+/* Cell styles */
+#inventoryTable td {
+    text-align: center; 
+    padding: 10px; 
+}
+
+/* Hover effect for table rows */
+#inventoryTable tbody tr:hover {
+    background-color: #f2f2f2; 
+}
+
+/* Button alignment */
+.mt-4.text-right {
+    text-align: right; 
+}
+
+/* Body and card styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    height: 100vh; 
+    margin: 0; 
+    padding-top: 56px; 
+}
+
+.card {
+    width: 100%; 
+    margin-top: 20px; 
+}
+
+/* Centering the table */
+.container {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+}
+
+/* Table container styles */
+.table-container {
+    width: 100%; 
+    padding: 20px; 
+}
+
+/* Ensure table occupies full width */
+#inventoryTable {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
+}
+
+/* Improved padding for header and body cells */
+#inventoryTable th, #inventoryTable td {
+    padding: 15px; 
+}
+
+/* Additional styling for inventory section */
+.content .inventory-section {
+    margin-bottom: 20px; 
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 10px; 
+}
+
+/* Ensure modal takes up full width */
+.modal-dialog {
+    max-width: 600px; 
+    margin: 1.75rem auto; 
+}
