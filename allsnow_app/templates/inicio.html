@@ -6,21 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
     <title>All Snow - Vive la nieve al máximo</title>
-    <link rel="stylesheet" href="{% static 'css/stylesinicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
+    <header class="header">
+        <nav class="navbar">
+            <ul class="nav-links">
                 <li><a href="{% url 'inicio' %}">Inicio</a></li>
                 <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
                 <li><a href="#centros-asociados">Centros asociados</a></li>
                 <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
                 <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
-                
             </ul>
             <a href="{% url 'login' %}" class="login-btn">Iniciar Sesión</a>
-            
         </nav>
     </header>
     
