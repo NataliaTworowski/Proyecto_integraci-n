@@ -16,7 +16,7 @@ header {
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Esto permite que los elementos se distribuyan entre izquierda y derecha */
     align-items: center;
     padding: 10px 20px;
 }
@@ -26,11 +26,14 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 100%; /* Asegura que el ul ocupe todo el ancho */
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
 }
 
 nav ul li {
     margin-right: 20px;
 }
+
 
 nav ul li a {
     text-decoration: none;

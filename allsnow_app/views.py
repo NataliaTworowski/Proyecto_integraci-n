@@ -284,31 +284,8 @@ def centro_rental_view(request):
     return render(request, 'interfaz_dueno.html', context)
 
 #Para editar la descripcion de las tiendas por los dueños
-from django.shortcuts import render, redirect
-from .forms import TiendaForm
-
 def editar_descripcion_view(request):
-    usuario = Usuarios.objects.get(id_usuario=request.user.id)
-    usuario_tienda = UsuarioTienda.objects.filter(id_usuario=usuario).first()
-    
-    if usuario_tienda:
-        tienda = usuario_tienda.id_tienda
-        
-        if request.method == 'POST':
-            form = TiendaForm(request.POST, instance=tienda)
-            if form.is_valid():
-                form.save()
-                return redirect('centro_rental_view')  
-        else:
-            form = TiendaForm(instance=tienda)
-        
-        context = {
-            'form': form,
-            'nombre_centro': f'CENTRO DE RENTAL "{tienda.nombre_tienda.upper()}"'
-        }
-        return render(request, 'editar_descripcion_view.html', context)  
-    else:
-        return redirect('centro_rental_view.html')  #cambiar despues esto para que se vaya al inicio
+     return render(request, 'editar_descripcion_view.html')
 
 #para mostrar el interfaz de compra los productos de cada tienda 
 from django.shortcuts import render, get_object_or_404
@@ -440,7 +417,7 @@ from .models import CarritoDeArriendo
 
 def ver_carro_de_arriendo(request):
     usuario_id = request.user.id  
-    id_tienda = request.session.get('id_tienda',2)  
+    id_tienda = request.session.get('id_tienda',1)  
     carrito_arriendo = request.session.get(f'carrito_arriendo_{usuario_id}', {})
     productos_carrito = []
     total_precio = 0.0

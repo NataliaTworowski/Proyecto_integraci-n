@@ -1,11 +1,44 @@
-.left-aligned {
-    position: absolute;
-    left: 0;
-    top: 20px; /* Ajusta este valor para posicionar los botones verticalmente */
-    margin-left: 10px; /* Ajusta este valor para dar algo de espacio a la izquierda si es necesario */
+/* estilos.css */
+
+/* Estilo para el texto largo */
+p {
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
 }
 
-/* styles.css */
+/* Estilo para el contenedor principal */
+main {
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+
+/* Fondo del cuerpo */
+body {
+    background-image: url("{% static 'img/fondodemontañas.png' %}");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Opciones de color circulares */
+.color-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Estilo para las tarjetas */
+.card {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+/* Navbar y footer */
 .navbar {
     background-color: rgba(29, 127, 151, 0.7); 
     width: 100%; 
@@ -24,7 +57,7 @@
     margin-right: 8px; 
 }
 
-/* Footer styles */
+/* Footer */
 .footer {
     background-color: rgba(29, 127, 151, 0.7); 
     position: fixed; 
@@ -35,30 +68,27 @@
     color: rgb(255, 255, 255) !important; 
 }
 
-/* Table header styles */
+/* Estilos para la tabla de inventario */
 #inventoryTable thead th {
     background-color: #65bac5 !important;
     color: white; 
     text-align: center; 
 }
 
-/* Cell styles */
 #inventoryTable td {
     text-align: center; 
     padding: 10px; 
 }
 
-/* Hover effect for table rows */
 #inventoryTable tbody tr:hover {
     background-color: #f2f2f2; 
 }
 
-/* Button alignment */
+/* Alineación de los botones */
 .mt-4.text-right {
     text-align: right; 
 }
 
-/* Body and card styles */
 body {
     display: flex;
     flex-direction: column;
@@ -74,32 +104,27 @@ body {
     margin-top: 20px; 
 }
 
-/* Centering the table */
 .container {
     display: flex;
     justify-content: center; 
     width: 100%; 
 }
 
-/* Table container styles */
 .table-container {
     width: 100%; 
     padding: 20px; 
 }
 
-/* Ensure table occupies full width */
 #inventoryTable {
     width: 100%; 
     border-collapse: collapse; 
     margin-bottom: 20px; 
 }
 
-/* Improved padding for header and body cells */
 #inventoryTable th, #inventoryTable td {
     padding: 15px; 
 }
 
-/* Additional styling for inventory section */
 .content .inventory-section {
     margin-bottom: 20px; 
 }
@@ -110,21 +135,30 @@ body {
     gap: 10px; 
 }
 
-/* Ensure modal takes up full width */
 .modal-dialog {
     max-width: 600px; 
     margin: 1.75rem auto; 
 }
 
-/* Paragraph styles */
-p {
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    white-space: normal; 
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #007bff;
 }
 
-/* Main container styles */
-main {
-    max-width: 800px; 
-    margin: 0 auto; 
+p {
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.list-group-item-action {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.list-group-item-action:hover {
+    background-color: #007bff;
+    color: white;
 }

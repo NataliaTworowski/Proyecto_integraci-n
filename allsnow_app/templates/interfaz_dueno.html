@@ -15,14 +15,12 @@
     <!-- Enlace al CSS -->
     <link rel="stylesheet" href="{% static 'css/interfaz_dueno.css' %}">
     <style>
-        p {
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-            white-space: normal; 
-        }
-        main {
-            max-width: 800px; 
-            margin: 0 auto; 
+        body {
+            background-image: url("{% static 'img/fondodemontañas.png' %}");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
     </style>
 </head>
@@ -39,7 +37,7 @@
                 </a>
                 <a href="{% url 'inventario_ventas' %}" class="list-group-item list-group-item-action">
                     <i class="fas fa-box me-2"></i> Inventario Ventas
-                </a>
+                </a>                
                 <a href="{% url 'inventario_arriendo' %}" class="list-group-item list-group-item-action">
                     <i class="fas fa-box me-2"></i> Inventario Arriendos
                 </a>
@@ -51,12 +49,16 @@
 
         <!-- Contenido Principal -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-5">
-            <h2 class="text-center mt-3 font-weight-bold">{{ nombre_centro }}</h2>
-            <p class="text-center">{{ descripcion }}</p>
-            <p class="text-center">
-                <i class="fas fa-map-marker-alt me-2"></i> {{ ubicacion }}
-            </p>
+            <!-- Contenedor con la clase card -->
+            <div class="card">
+                <h2 class="text-center font-weight-bold">Vientos Helados</h2>
+                <p class="text-center">El centro de rental Vientos Helados es un establecimiento especializado en el alquiler de equipos para actividades al aire libre, como esquí y snowboard. Ofrece una amplia variedad de productos de alta calidad para disfrutar de los deportes de invierno, con atención personalizada y servicio en un ambiente cómodo y accesible. Además, proporciona asesoramiento sobre el tipo de equipo más adecuado según el nivel de habilidad y las condiciones meteorológicas.</p>
+                <p class="text-center">
+                    <i class="fas fa-map-marker-alt me-2"></i> Calle de la Montaña 1450, Sector El Colorado, Santiago, Chile.
+                </p>
+            </div>
         </main>
+        
     </div>
 </div>
 {% endblock %}
