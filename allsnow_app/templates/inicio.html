@@ -17,8 +17,9 @@
                 <li><a href="#centros-asociados">Centros asociados</a></li>
                 <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
                 <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
-                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                
             </ul>
+            <a href="{% url 'login' %}" class="login-btn">Iniciar Sesión</a>
             
         </nav>
     </header>
@@ -29,11 +30,11 @@
         </section>
     </main>
     
-    <footer>
-        <div class="contacto">
-            <p class="negrita">CONTACTO</p>
+    <footer class="footer">
+        <div class="contact">
+            <p><strong>CONTACTO</strong></p>
             <p>📞 +56971528690</p>
-            <p>✉️ allsnowcl@gmail.com</p>
+            <p>📧 allsnowcl@gmail.com</p>
         </div>
     </footer>
     <script src="{% static 'css/scriptinicio.js' %}"></script>
