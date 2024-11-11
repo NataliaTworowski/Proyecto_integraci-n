@@ -613,7 +613,7 @@ def login_view(request):
                     return redirect('filtro_tienda')  # Redirige a la vista 'filtro_tienda'
 
                 else:
-                    messages.error(request, "Correo o contraseña incorrecta")
+                    messages.error(request, "Correo electrónico o contraseña incorrecta. Intenta nuevamente.")
 
             except Registrarme.DoesNotExist:
                 # Si el usuario no existe, muestra un mensaje de error

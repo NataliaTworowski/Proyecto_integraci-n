@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,32 @@
     <title>All Snow - Vive la nieve al máximo</title>
     <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 </head>
+
 <body>
     <header class="header">
         <nav class="navbar">
+            <a class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+                All Snow
+            </a>    
             <ul class="nav-links">
-                <li><a href="{% url 'inicio' %}">Inicio</a></li>
-                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
-                <li><a href="#centros-asociados">Centros asociados</a></li>
-                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
-                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
+                
+                <li><a href="{% url 'inicio' %}" class="btn">Inicio</a></li>
+                <li><a href="#sobre-nosotros" class="btn">Sobre nosotros</a></li>
+                <li><a href="#centros-asociados" class="btn">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}" class="btn">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}" class="btn">Registrarme</a></li>
             </ul>
-            <a href="{% url 'login' %}" class="login-btn">Iniciar Sesión</a>
+            <a href="{% url 'login' %}" class="btn">Iniciar Sesión</a>
         </nav>
     </header>
-    
+
     <main>
         <section class="hero">
             <img src="{% static 'img/fondo.png' %}" alt="Paisaje de nieve">
         </section>
     </main>
-    
+
     <footer class="footer">
         <div class="contact">
             <p><strong>CONTACTO</strong></p>
@@ -37,4 +44,5 @@
     </footer>
     <script src="{% static 'css/scriptinicio.js' %}"></script>
 </body>
+
 </html>

@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="{% static 'css/trabaja_con_nosotros.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'inicio' %}">Inicio</a></li>
-                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
-                <li><a href="#centros-asociados">Centros asociados</a></li>
-                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
-                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
+    <header class="header">
+        <nav class="navbar">
+            <a class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+                All Snow
+            </a>    
+            <ul class="nav-links">
+                
+                <li><a href="{% url 'inicio' %}" class="btn">Inicio</a></li>
+                <li><a href="#sobre-nosotros" class="btn">Sobre nosotros</a></li>
+                <li><a href="#centros-asociados" class="btn">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}" class="btn">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}" class="btn">Registrarme</a></li>
             </ul>
-            <div class="login">
-                <input type="email" placeholder="Correo electrónico">
-                <input type="password" placeholder="Contraseña">
-                <button class="button iniciar-sesion">Iniciar sesión</button>
-            </div>
+            <a href="{% url 'login' %}" class="btn">Iniciar Sesión</a>
         </nav>
     </header>
     
@@ -62,11 +63,11 @@
             </section>            
         </div>
     </main>
-    <footer>
-        <div class="contacto">
-            <p class="negrita">CONTACTO</p>
+    <footer class="footer">
+        <div class="contact">
+            <p><strong>CONTACTO</strong></p>
             <p>📞 +56971528690</p>
-            <p>✉️ allsnowcl@gmail.com</p>
+            <p>📧 allsnowcl@gmail.com</p>
         </div>
     </footer>
     <script src="{% static 'css/scriptinicio.js' %}"></script>

@@ -13,11 +13,23 @@ body {
 }
 
 .header {
-    background-color: #fff;
+    background-color: #003366;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.logo {
+    width: 40px; /* Ancho fijo */
+    height: 40px; /* Mantiene la proporción de la imagen */
+    max-width: 100%; /* Para asegurar que no se desborde */
+    color: #fff;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    gap: 0.5rem; /* Ajusta el espacio entre la imagen y el texto */
 }
 
 .navbar {
@@ -25,6 +37,7 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    color: #fff;
 }
 
 .nav-links {
@@ -35,14 +48,14 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: #949494;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: Arial;
 }
 
-.login-btn {
+.btn {
     text-decoration: none;
-    color: #949494;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: Arial;
     background-color: transparent;
     padding: 0.5rem 1rem;
     border: 2px solid #003366;
@@ -50,9 +63,9 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.login-btn:hover {
-    background-color: #003366;
-    color: #fff;
+.btn:hover {
+    background-color: #ffffff;
+    color: #003366;
 }
 
 .hero {

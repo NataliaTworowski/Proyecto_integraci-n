@@ -1,227 +1,190 @@
-/* Estilos generales */
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
-/* Estilos del encabezado */
-header {
-    background-color: white;
-    border-bottom: 1px solid #ccc;
-    position: fixed;
-    width: 100%;
-    top: 0px;
-    z-index: 100;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
 }
 
-nav {
+.header {
+    background-color: #003366;
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between; /* Esto permite que los elementos se distribuyan entre izquierda y derecha */
+    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
 }
 
-nav ul {
+.logo {
+    width: 40px; /* Ancho fijo */
+    height: 40px; /* Mantiene la proporción de la imagen */
+    max-width: 100%; /* Para asegurar que no se desborde */
+    color: #fff;
+}
+.navbar-brand {
     display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    gap: 0.5rem; /* Ajusta el espacio entre la imagen y el texto */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+}
+
+.nav-links {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Asegura que el ul ocupe todo el ancho */
-    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    display: flex;
+    gap: 2rem;
 }
 
-nav ul li {
-    margin-right: 20px;
-}
-
-
-nav ul li a {
+.nav-links a {
     text-decoration: none;
-    color: gray;
-    font-weight: normal;
-    cursor: pointer;
+    color: #ffffff;
+    font-weight: Arial;
 }
 
-/* Estilos del héroe */
+.btn {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: Arial;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 2px solid #003366;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    color: #003366;
+}
+
 .hero {
     position: relative;
-    text-align: center;
-    color: white;
-    margin-top: 60px; /* Compensar la altura del encabezado */
+    width: 100%;
+    height: 82vh; /*altura de la pantalla*/
+    overflow: hidden;
 }
 
 .hero img {
     width: 100%;
-    height: 82vh;
-    object-fit: cover;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que cubra toda el área sin deformarse */
+    object-position: center; /* Centra la imagen */
 }
 
-/* Contenedor general de formularios */
-.form-container-wrapper {
-    display: flex; 
-    flex-wrap: wrap; /* Permite que los formularios se ajusten en varias líneas */
-    justify-content: center; /* Centra los formularios */
-    gap: 10px; /* Espacio entre los formularios */
-}
-
-/* Estilos del formulario de registro */
-.formulario-registro {
-    display: flex; /* Oculta los formularios inicialmente */
-    position: fixed;
+.hero .overlay {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); 
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Oscurece la imagen con una capa semitransparente */
+}
+
+.footer {
+    background-color: #003366;
+    color: #fff;
+    padding: 1rem;
+    text-align: right;
+    margin-top: auto;
+}
+
+.contact p {
+    margin: 0.5rem 0;
+}
+
+.formulario-registro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 2;
 }
 
-/* Estilo de contenedor interno del formulario */
 .form-container {
-    background: white;
-    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+    padding: 2rem;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
     text-align: center;
-    width: 100%;
-    max-width: 500px; /* Asegura que no sea muy ancho */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-    overflow-y: auto; /* Permite desplazamiento si el contenido es largo */
+    font: Arial;
 }
 
-.form-container h2 {
-    margin-bottom: 20px;
+/* Título del formulario */
+.form-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #333;
 }
 
-.form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form-container form input,
-.form-container form select {
-    padding: 12px;
-    border: 1px solid #ccc;
+/* Estilos para mensajes de error */
+.alert.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
     border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
+    border: 1px solid #f5c6cb;
 }
 
-.form-container form button {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-
-.form-container form button:hover {
-    background-color: #45a049;
-}
-
-/* NUEVOS ESTILOS PARA EL FORMULARIO DE "TRABAJA CON NOSOTROS" */
-.form-row {
-    display: flex; 
-    justify-content: space-between;
-}
-
+/* Estilos para los campos de entrada */
 .form-group {
-    width: 48%; /* Ajusta para que ambos grupos estén uno al lado del otro */
+    margin-bottom: 1.5rem;
+    text-align: left;
 }
 
-.iniciar-sesion {
-    background-color: #4CAF50; /* Verde */
-    padding: 10px; /* Ajusta el padding según lo que necesites */
-    border-radius: 5px; /* Radio de borde específico */
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px; /* Ajusta el tamaño de fuente */
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
 }
 
-.bigbutton {
+.form-group input {
     width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
 }
 
-button:hover {
-    background-color: #218838;
+.form-group input:focus {
+    border-color: #66afe9;
+    outline: none;
 }
 
-/* Asegura que el último elemento no tenga margen extra */
-.datos-local input:last-child,
-.datos-local select:last-child {
-    margin-right: 0; /* Elimina margen del último elemento */
+/* Botón de envío */
+button[type="submit"] {
+    text-decoration: none;
+    color: #949494;
+    font-weight: Arial;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 2px solid #003366;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.form-container p {
-    font-size: 12px;
-    color: gray;
-    margin-top: 10px;
+button[type="submit"]:hover {
+    background-color: #003366;
+    color: #fff;
 }
 
-/* Estilos del pie de página */
-footer {
-    background-color: #00ADEF;
-    color: white;
-    text-align: center;
-    padding: 10px 10;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.contacto p {
-    margin: 5px 0;
-    text-align: right;
-    padding-right: 20px;
-}
-
-.negrita {
-    font-weight: bold;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .login {
-        flex-direction: column;
-    }
-
-    .form-row {
-        flex-direction: column; /* Cambia a vertical en pantallas pequeñas */
-    }
-
-    .form-group {
-        width: 100%; /* Cada grupo ocupa todo el ancho */
-    }
-
-    .form-container {
-        width: 90%; /* Ancho más flexible para el contenedor del formulario */
-        max-width: none; /* Elimina el max-width en pantallas pequeñas */
-        padding: 15px; /* Ajusta el padding */
-    }
-
-    .form-container form {
-        gap: 8px; /* Reduce el espacio entre elementos */
-    }
-
-    .form-container p {
-        font-size: 10px; /* Reduce el tamaño de la fuente para las notas */
-    }
-
-    .bigbutton, .iniciar-sesion {
-        padding: 8px; /* Ajusta el padding de los botones */
-        font-size: 14px; /* Ajusta el tamaño de la fuente de los botones */
-    }
-}
