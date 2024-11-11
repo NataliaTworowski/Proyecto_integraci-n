@@ -56,7 +56,7 @@ def administrador(request):
 
 def aprobar_solicitud(request, solicitud_id):
     # Obtiene la solicitud de tienda usando el campo correcto 'id_solicitud_tienda'
-    solicitud = get_object_or_404(SolicitudLocal, id_solicitud_tienda=solicitud_id)
+    solicitud = get_object_or_404(SolicitudLocal, id=solicitud_id)
     
     # Crea una nueva entrada en Tiendas usando los datos de la solicitud
     Tiendas.objects.create(
@@ -71,7 +71,7 @@ def aprobar_solicitud(request, solicitud_id):
 
 def rechazar_solicitud(request, solicitud_id):
     # Obtiene la solicitud de tienda usando el campo correcto 'id_solicitud_tienda'
-    solicitud = get_object_or_404(SolicitudLocal, id_solicitud_tienda=solicitud_id)
+    solicitud = get_object_or_404(SolicitudLocal, id=solicitud_id)
     
     # Elimina la solicitud de tienda al rechazarla
     solicitud.delete()
@@ -539,6 +539,10 @@ def interfaz_arriendo(request, id_tienda):
     return render(request, 'interfaz_arriendo.html', context)
 
 
+
+
+
+
 ####PAULA MIKAL INICIO####
 
 
@@ -623,5 +627,23 @@ def login_view(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form': form})
+
+def administrador(request):
+    return render(request, 'administrador.html')
+
+def base(request):
+    return render(request, 'base.html')
+
+def sobre_nosotros(request):
+    return render(request, 'sobre_nosotros.html')
+
+def ver_carro_de_compras(request):
+    return render(request, 'ver_carro_de_compras.html')
+
+def ver_carro_de_arriendo(request):
+    return render(request, 'ver_carro_de_arriendo.html')
+
+
+
 
 ####PAULA MIKAL FIN####

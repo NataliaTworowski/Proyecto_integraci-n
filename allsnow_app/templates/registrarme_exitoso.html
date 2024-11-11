@@ -6,33 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
     <title>All Snow - Vive la nieve al máximo</title>
-    <link rel="stylesheet" href="{% static 'css/registrarme_exitoso.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registrar_local.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'inicio' %}">Inicio</a></li>
-                <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
-                <li><a href="#centros-asociados">Centros asociados</a></li>
-                <li><a href="{% url 'trabaja_con_nosotros' %}">Trabaja con nosotros</a></li>
-                <li><a href="{% url 'registrarme' %}">Registrarme</a></li>
-                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+    <header class="header">
+        <nav class="navbar">
+            <a class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+                All Snow
+            </a>    
+            <ul class="nav-links">
+                
+                <li><a href="{% url 'inicio' %}" class="btn">Inicio</a></li>
+                <li><a href="{% url 'sobre_nosotros' %}" class="btn">Sobre Nosotros</a></li>
+                <li><a href="#centros-asociados" class="btn">Centros asociados</a></li>
+                <li><a href="{% url 'trabaja_con_nosotros' %}" class="btn">Trabaja con nosotros</a></li>
+                <li><a href="{% url 'registrarme' %}" class="btn">Registrarme</a></li>
             </ul>
+            <a href="{% url 'login' %}" class="btn">Iniciar Sesión</a>
         </nav>
-        <h4><center>Bienvenido a All Snow. Inicia tu sesión porque ¡ya puedes comprar o arrendar tus productos favoritos!</center></h4>
     </header>
+
     <main>
         <section class="hero">
             <img src="{% static 'img/fondo.png' %}" alt="Paisaje de nieve">
+            <div class="overlay">
+                <h4>Bienvenido a All Snow. Inicia tu sesión porque ¡ya puedes comprar o arrendar tus productos favoritos!</h4>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="contacto">
-            <p class="negrita">CONTACTO</p>
+    <footer class="footer">
+        <div class="contact">
+            <p><strong>CONTACTO</strong></p>
             <p>📞 +56971528690</p>
-            <p>✉️ allsnowcl@gmail.com</p>
+            <p>📧 allsnowcl@gmail.com</p>
         </div>
     </footer>
     <script src="{% static 'css/scriptinicio.js' %}"></script>

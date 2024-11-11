@@ -51,4 +51,8 @@ urlpatterns = [
     path('interfaz_arriendo/<int:id_tienda>/', views.interfaz_arriendo, name='interfaz_arriendo'),
     path('carro_de_arriendo/<int:producto_id>/', views.carro_de_arriendo, name='carro_de_arriendo'),
     path('carro_de_arriendo/', views.ver_carro_de_arriendo, name='ver_carro_de_arriendo'),
+    path('base/', views.base, name='base'),
+    path('sobre_nosotros/', views.sobre_nosotros, name='sobre_nosotros'),
+    path('ver_carro_de_arriendo/', views.ver_carro_de_arriendo, name='ver_carro_de_arriendo'),
+        path('ver_carro_de_compras/', views.ver_carro_de_compras, name='ver_carro_de_compras'),
 ]

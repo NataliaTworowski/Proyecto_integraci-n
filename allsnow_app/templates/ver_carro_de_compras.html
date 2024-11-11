@@ -1,7 +1,4 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block content %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +11,170 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Enlace al CSS específico para inventario ventas -->
     <link rel="stylesheet" href="{% static 'css/ver_carro_de_compras.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'img/fondodemontañas.png' %}");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background-color: #003366;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+        
+        .navbar .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .navbar .navbar-toggler {
+            border-color: white;
+        }
+        
+        .navbar .navbar-toggler-icon {
+            background-color: white;
+        }
+        
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+        }
+        
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 16px;
+        }
+        
+        .footer .container a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer .container a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            flex: 1;
+        }
+        
+        h2.text-center {
+            color: #0066cc;
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .modal-content {
+            background-color: #f8f9fa;
+        }
+        
+        .modal-header {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .modal-body {
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: auto;
+            max-height: 60px;
+        }
+        
+        .titulo {
+            font-size: 40px;
+            font-weight: bold;
+            color: #003366;
+            position: relative;
+            font-family: 'Lucida Sans', sans-serif;
+        }
+        
+        .titulo::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background-color: #0072ff;
+            margin: 0 auto;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out;
+            transform: translate(0, -100px);
+        }
+        
+        .modal.fade.show .modal-dialog {
+            transform: translate(0, 0);
+        }
+        
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2>Carro de Compras</h2>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
+            All Snow
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Centros asociados</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Trabaja con nosotros</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    {% if productos_carrito %}
+    <!-- Contenedor principal -->
+    <div class="container mt-5">
+        <h2>Carro de Compras</h2>
+
+        <!-- Tabla con productos precargados -->
         <table class="table">
             <thead>
                 <tr>
@@ -31,37 +186,66 @@
                 </tr>
             </thead>
             <tbody>
-                {% for producto in productos_carrito %}
+                <!-- Producto 1 -->
                 <tr>
-                    <td>{{ producto.nombre }}</td>
-                    <td>${{ producto.precio }}</td>
+                    <td>Snowboard All Mountain</td>
+                    <td>$30.000</td>
+                    <td>1</td>
+                    <td>$30.000</td>
                     <td>
-                        <form method="post" action="{% url 'actualizar_cantidad' producto.id_producto %}">
-                            {% csrf_token %}
-                            <input type="number" name="cantidad" value="{{ producto.cantidad }}" min="0" class="form-control" style="width: 70px;">
-                            <button type="submit" class="btn btn-primary btn-sm mt-2">Actualizar</button>
-                        </form>
-                    </td>
-                    <td>${{ producto.subtotal }}</td>
-                    <td>
-                        <form method="post" action="{% url 'eliminar_producto' producto.id_producto %}">
-                            {% csrf_token %}
+                        <form method="post" action="#">
                             <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash"></i> Eliminar
                             </button>
                         </form>
                     </td>
                 </tr>
-                {% endfor %}
+                <!-- Producto 2 -->
+                <tr>
+                    <td>Esquís de Pista</td>
+                    <td>$25.000</td>
+                    <td>1</td>
+                    <td>$25.000</td>
+                    <td>
+                        <form method="post" action="#">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- Producto 3 -->
+                <tr>
+                    <td>Botas de Esquí</td>
+                    <td>$12.000</td>
+                    <td>1</td>
+                    <td>$12.000</td>
+                    <td>
+                        <form method="post" action="#">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <h4>Total: ${{ total_precio }}</h4>
-    {% else %}
-        <p>No hay productos en el carrito.</p>
-    {% endif %}
 
-    <a href="{% url 'interfaz_compra' id_tienda %}" class="btn btn-primary mt-3">Seguir comprando</a>
-</div>
-{% endblock %}
+        <!-- Total del carrito -->
+        <h4>Total: $67.000</h4>
+
+        <!-- Botón para seguir comprando -->
+        <a href="#" class="btn btn-primary mt-3">Seguir comprando</a>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="footer mt-4">
+        <div class="container text-center">
+            <p><strong>Contacto:</strong><br> 
+                Teléfono: 📞 +56923917032 <br> 
+                Correo: ✉️ allsnowcl@gmail.com
+            </p>
+        </div>
+    </footer>
 </body>
 </html>

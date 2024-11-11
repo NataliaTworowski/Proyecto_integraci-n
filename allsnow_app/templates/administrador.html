@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/administrador.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pantalla_admin.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -22,173 +22,172 @@
                 <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Centros asociados</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Trabaja con nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Registrarme</a></li>
             </ul>
         </div>
     </nav>
     
     <div class="container mt-4">
-        <h2>Panel de Administración</h2>
-        
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" id="adminTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="suscripciones-tab" data-toggle="tab" href="#suscripciones" role="tab">Suscripciones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="tiendas-tab" data-toggle="tab" href="#tiendas" role="tab">Tiendas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab">Solicitudes de Tiendas</a>
-            </li>
-        </ul>
+        <div class="card shadow-lg p-4 bg-light"> <!-- Card container added -->
+            <h2 class="text-center">Panel de Administración</h2>
+            
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="suscripciones-tab" data-toggle="tab" href="#suscripciones" role="tab">Suscripciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tiendas-tab" data-toggle="tab" href="#tiendas" role="tab">Tiendas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab">Solicitudes de Tiendas</a>
+                </li>
+            </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Suscripciones Tab -->
-            <div class="tab-pane fade show active" id="suscripciones" role="tabpanel" aria-labelledby="suscripciones-tab">
-                <h3 class="mt-3">Suscripciones Activas</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID Suscripción</th>
-                            <th>ID Tienda</th>
-                            <th>Fecha de Inicio</th>
-                            <th>Fecha de Fin</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for suscripcion in suscripciones %}
-                        <tr>
-                            <td>{{ suscripcion.id_sub }}</td>
-                            <td>{{ suscripcion.id_tienda_id }}</td>
-                            <td>{{ suscripcion.fecha_inicio }}</td>
-                            <td>{{ suscripcion.fecha_fin }}</td>
-                            <td>{{ suscripcion.monto }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5">No hay suscripciones activas.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Suscripciones Tab -->
+                <div class="tab-pane fade show active" id="suscripciones" role="tabpanel" aria-labelledby="suscripciones-tab">
+                    <h3 class="mt-3">Suscripciones Activas</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Suscripción</th>
+                                <th>ID Tienda</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Fecha de Fin</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for suscripcion in suscripciones %}
+                            <tr>
+                                <td>{{ suscripcion.id_sub }}</td>
+                                <td>{{ suscripcion.id_tienda_id }}</td>
+                                <td>{{ suscripcion.fecha_inicio }}</td>
+                                <td>{{ suscripcion.fecha_fin }}</td>
+                                <td>{{ suscripcion.monto }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">No hay suscripciones activas.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-            <!-- Tiendas Tab -->
-            <div class="tab-pane fade" id="tiendas" role="tabpanel" aria-labelledby="tiendas-tab">
-                <h3 class="mt-3">Listado de Tiendas</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID Tienda</th>
-                            <th>Nombre</th>
-                            <th>Ubicación</th>
-                            <th>Región</th>
-                            <th>Estado de Suscripción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for tienda in tiendas %}
-                        <tr>
-                            <td>{{ tienda.id_tienda }}</td>
-                            <td>{{ tienda.nombre_tienda }}</td>
-                            <td>{{ tienda.ubicacion }}</td>
-                            <td>{{ tienda.region }}</td>
-                            <td>{{ tienda.estado_suscripcion }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5">No hay tiendas disponibles.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                <!-- Tiendas Tab -->
+                <div class="tab-pane fade" id="tiendas" role="tabpanel" aria-labelledby="tiendas-tab">
+                    <h3 class="mt-3">Listado de Tiendas</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Tienda</th>
+                                <th>Nombre</th>
+                                <th>Ubicación</th>
+                                <th>Región</th>
+                                <th>Estado de Suscripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tienda in tiendas %}
+                            <tr>
+                                <td>{{ tienda.id_tienda }}</td>
+                                <td>{{ tienda.nombre_tienda }}</td>
+                                <td>{{ tienda.ubicacion }}</td>
+                                <td>{{ tienda.region }}</td>
+                                <td>{{ tienda.estado_suscripcion }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">No hay tiendas disponibles.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-            <!-- Solicitudes de Tiendas Tab -->
-            <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
-                <h3 class="mt-3">Solicitudes de Tiendas</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID Solicitud</th>
-                            <th>Nombre Tienda</th>
-                            <th>Patente</th>
-                            <th>Fecha de Solicitud</th>
-                            <th>Región</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for solicitud in solicitudes %}
-                        <tr>
-                            <td>{{ solicitud.id_solicitud_tienda }}</td>
-                            <td>{{ solicitud.nombre_tienda }}</td>
-                            <td>{{ solicitud.patente_local }}</td>
-                            <td>{{ solicitud.fecha_solicitud }}</td>
-                            <td>{{ solicitud.region }}</td>
-                            <td>
-                                <!-- Button to trigger Approve modal -->
-                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveModal{{ solicitud.id_solicitud_tienda }}">Aprobar</button>
+                <!-- Solicitudes de Tiendas Tab -->
+                <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
+                    <h3 class="mt-3">Solicitudes de Tiendas</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Solicitud</th>
+                                <th>Nombre Tienda</th>
+                                <th>Patente</th>
+                                <th>ubicacion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for solicitud in solicitudes %}
+                            <tr>
+                                <td>{{ solicitud.id }}</td>
+                                <td>{{ solicitud.nombre_local }}</td>
+                                <td>{{ solicitud.patente }}</td>
+                                <td>{{ solicitud.ubicacion }}</td>
                                 
-                                <!-- Button to trigger Reject modal -->
-                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#rejectModal{{ solicitud.id_solicitud_tienda }}">Rechazar</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Approve Modal -->
-                        <div class="modal fade" id="approveModal{{ solicitud.id_solicitud_tienda }}" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="approveModalLabel">Confirmar Aprobación</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de aprobar la solicitud de {{ solicitud.nombre_tienda }}?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <a href="{% url 'aprobar_solicitud' solicitud.id_solicitud_tienda %}" class="btn btn-success">Confirmar</a>
+                                <td>
+                                    <!-- Button to trigger Approve modal -->
+                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveModal{{ solicitud.id }}">Aprobar</button>
+                                    
+                                    <!-- Button to trigger Reject modal -->
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#rejectModal{{ solicitud.id }}">Rechazar</button>
+                                </td>
+                            </tr>
+                            
+                            <!-- Approve Modal -->
+                            <div class="modal fade" id="approveModal{{ solicitud.id}}" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="approveModalLabel">Confirmar Aprobación</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estás seguro de aprobar la solicitud de {{ solicitud.nombre_local }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <a href="{% url 'aprobar_solicitud' solicitud.id %}" class="btn btn-success">Confirmar</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Reject Modal -->
-                        <div class="modal fade" id="rejectModal{{ solicitud.id_solicitud_tienda }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="rejectModalLabel">Confirmar Rechazo</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de rechazar la solicitud de {{ solicitud.nombre_tienda }}?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <a href="{% url 'rechazar_solicitud' solicitud.id_solicitud_tienda %}" class="btn btn-danger">Confirmar</a>
+                            <!-- Reject Modal -->
+                            <div class="modal fade" id="rejectModal{{ solicitud.id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="rejectModalLabel">Confirmar Rechazo</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estás seguro de rechazar la solicitud de {{ solicitud.nombre_local }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <a href="{% url 'rechazar_solicitud' solicitud.id %}" class="btn btn-danger">Confirmar</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {% empty %}
-                        <tr>
-                            <td colspan="6">No hay solicitudes pendientes.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6">No hay solicitudes pendientes.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </div> <!-- End card container -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

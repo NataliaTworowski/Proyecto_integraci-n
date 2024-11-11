@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'img/logo_transparente.png' %}">
     <title>All Snow - Vive la nieve al máximo</title>
-    <link rel="stylesheet" href="{% static 'css/trabaja_con_nosotros.css' %}">
+    <link rel="stylesheet" href="{% static 'css/trabaja_con_nosotros1.css' %}">
 </head>
 <body>
     <header class="header">
@@ -18,7 +18,7 @@
             <ul class="nav-links">
                 
                 <li><a href="{% url 'inicio' %}" class="btn">Inicio</a></li>
-                <li><a href="#sobre-nosotros" class="btn">Sobre nosotros</a></li>
+                <li><a href="{% url 'sobre_nosotros' %}" class="btn">Sobre Nosotros</a></li>
                 <li><a href="#centros-asociados" class="btn">Centros asociados</a></li>
                 <li><a href="{% url 'trabaja_con_nosotros' %}" class="btn">Trabaja con nosotros</a></li>
                 <li><a href="{% url 'registrarme' %}" class="btn">Registrarme</a></li>
@@ -34,12 +34,13 @@
             <!-- Formulario de Solicitud de Tienda y Usuario -->
             <section class="formulario-trabaja-con-nosotros" id="formularioTrabajaConNosotros">
                 <div class="form-container">
-                    <h2>Trabaja con Nosotros</h2>
+                    <h3>Trabaja con Nosotros</h3>
+                    <br>
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="form-group">
-                                <h3>Datos Usuario</h3>
+                                <h4>Datos Usuario</h4>
                                 <p>{{ form_usuario.nombre.label_tag }} {{ form_usuario.nombre }}</p>
                                 <p>{{ form_usuario.apellido.label_tag }} {{ form_usuario.apellido }}</p>
                                 <p>{{ form_usuario.rut.label_tag }} {{ form_usuario.rut }}</p>
@@ -49,14 +50,14 @@
                             </div>
                             
                             <div class="form-group">
-                                <h3>Datos Local</h3>
+                                <h4>Datos Local</h4>
                                 <p>{{ form_local.nombre_local.label_tag }} {{ form_local.nombre_local }}</p>
                                 <p>{{ form_local.patente.label_tag }} {{ form_local.patente }}</p>
                                 <p>{{ form_local.ubicacion.label_tag }} {{ form_local.ubicacion }}</p>
                             </div>
                         </div>
                         
-                        <button type="submit" class="button bigbutton">Registrar Local</button>
+                        <button type="submit" class="btn">Registrar Local</button>
                     </form>
                     <p>Al registrarte aceptas los términos y condiciones.</p>
                 </div>

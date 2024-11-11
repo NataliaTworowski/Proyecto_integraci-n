@@ -1,122 +1,175 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
-/* Estilos del encabezado */
-header {
-    background-color: white;
-    border-bottom: 1px solid #ccc;
-    position: fixed;
-    width: 100%;
-    top: 0px;
-    z-index: 100;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
 }
 
-nav {
+.header {
+    background-color: #003366;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
 }
 
-nav ul {
+.logo {
+    width: 40px; /* Ancho fijo */
+    height: 40px; /* Mantiene la proporción de la imagen */
+    max-width: 100%; /* Para asegurar que no se desborde */
+    color: #fff;
+}
+.navbar-brand {
     display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    gap: 0.5rem; /* Ajusta el espacio entre la imagen y el texto */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+}
+
+.nav-links {
     list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    margin-right: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: gray;
-    font-weight: normal;
-    cursor: pointer;
-}
-
-.login {
     display: flex;
-    gap: 10px;
+    gap: 2rem;
 }
 
-.login input {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: Arial;
+}
+/* Botón de envío */
+button[type="submit"] {
+    text-decoration: none;
+    color: #949494;
+    font-weight: Arial;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 2px solid #003366;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.login button {
-    padding: 6px 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+button[type="submit"]:hover {
+    background-color: #003366;
+    color: #fff;
 }
 
-/* Estilos del héroe */
+.btn {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: Arial;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 2px solid #003366;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    color: #003366;
+}
+
 .hero {
     position: relative;
-    text-align: center;
-    color: white;
-    margin-top: 60px; /* Compensar la altura del encabezado */
+    width: 100%;
+    height: 82vh; /*altura de la pantalla*/
+    overflow: hidden;
 }
 
 .hero img {
     width: 100%;
-    height: 82vh;
-    object-fit: cover;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que cubra toda el área sin deformarse */
+    object-position: center; /* Centra la imagen */
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.footer {
+    background-color: #003366;
+    color: #fff;
+    padding: 1rem;
+    text-align: right;
+    margin-top: auto;
+}
+
+.contact p {
+    margin: 0.5rem 0;
 }
 
 .form-container-wrapper {
     display: flex; 
     flex-wrap: wrap; /* Permite que los formularios se ajusten en varias líneas */
     justify-content: center; /* Centra los formularios */
-    gap: 10px; /* Espacio entre los formularios */
+    gap: 20px; /* Espacio entre los formularios */
 }
 
-/* Asegúrate de que los formularios estén configurados correctamente */
-.formulario-registro {
+.formulario-trabaja-con-nosotros {
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); 
-    justify-content: center;
-    align-items: center;
-}
-
-.formulario-trabaja-con-nosotros {
-    display: none;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.6);
     justify-content: center;
-    align-items: center;
-    padding: 20px;
+    align-items: center; /* Cambiado a 'center' para centrar verticalmente */
 }
 
 .form-container {
-    background: white;
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+    padding: 2rem;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
     text-align: center;
-    overflow: auto;
-    width: 80%; 
-    max-width: 400px; 
+    font: Arial;
 }
 
-.form-container h2 {
-    margin-bottom: 20px;
+/* Título del formulario */
+.form-container h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.form-container .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espacio entre las columnas */
+}
+
+.form-group {
+    width: 48%; /* Ajustar el ancho de cada grupo para que quepan lado a lado */
+}
+
+.form-container h3 {
+    margin-bottom: 10px;
+    color: #444;
 }
 
 .form-container form {
@@ -125,17 +178,14 @@ nav ul li a {
     gap: 10px;
 }
 
-.form-container form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
+.form-container form input,
 .form-container form select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .form-container form button {
@@ -143,7 +193,7 @@ nav ul li a {
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    box-sizing: border-box;
 }
 
 /* NUEVOS ESTILOS PARA EL FORMULARIO DE "TRABAJA CON NOSOTROS" */
@@ -154,7 +204,7 @@ nav ul li a {
 }
 
 .form-group {
-    width: 48%; /* Ajusta para que ambos grupos estén uno al lado del otro */
+    width: 40%; /* Ajusta para que ambos grupos estén uno al lado del otro */
 }
 
 .form-container form input,
@@ -211,24 +261,16 @@ button:hover {
 }
 
 /* Estilos del pie de página */
-footer {
-    background-color: #00ADEF;
-    color: white;
-    text-align: center;
-    padding: 10px 10;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.contacto p {
-    margin: 5px 0;
+.footer {
+    background-color: #003366;
+    color: #fff;
+    padding: 1rem;
     text-align: right;
-    padding-right: 20px;
+    margin-top: auto;
 }
 
-.negrita {
-    font-weight: bold;
+.contact p {
+    margin: 0.5rem 0;
 }
 
 /* Estilos responsivos */
