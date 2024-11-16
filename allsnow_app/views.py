@@ -42,10 +42,9 @@ def filtro_tiendas(request):
 
 
 def administrador(request):
-    solicitudes = SolicitudLocal.objects.all()  # Obtener todas las solicitudes de tienda
-    tiendas = Tiendas.objects.all()              # Obtener todas las tiendas
-    suscripciones = Suscripcion.objects.all()    # Obtener todas las suscripciones
-
+    solicitudes = SolicitudLocal.objects.all()  
+    tiendas = Tiendas.objects.all()         
+    suscripciones = Suscripcion.objects.all()    
     context = {
         'solicitudes': solicitudes,
         'tiendas': tiendas,

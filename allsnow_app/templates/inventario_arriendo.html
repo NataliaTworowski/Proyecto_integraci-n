@@ -1,193 +1,209 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Inventario Arriendo{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ nombre_centro }}</title>
+    <title>Inventario ventas</title>
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'css/interfaz_arriendo.css' %}">
-    <style>
-        body {
-            background-image: url("{% static 'img/fondodemontañas.png' %}");
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            padding-top: 70px;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'img/logo.png' %}" alt="Logo All Snow" class="logo"> 
-            All Snow
-        </a>        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Centros asociados</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Trabaja con nosotros</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ver_carro_de_arriendo' %}">
-                        <i class="bi bi-cart3"></i> Carrito
-                    </a>
-                </li>
-            </ul>
-        </div>        
-    </nav>
-
-    <div class="container mt-5">
-        <div class="row">
-            <aside class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
-                <div class="list-group mt-3">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <i class="fas fa-filter me-2"></i> Filtros
-                    </a>
-                    <div class="list-group-item">
-                        <h5>Filtrar por:</h5>
-                        <form id="filtros-form">
-                            <div class="form-group">
-                                <label for="categoria">Categoría</label>
-                                <select class="form-control" id="categoria" name="categoria" onchange="mostrarFiltros()">
-                                    <option value="">Seleccione</option>
-                                    <option value="tallas">Tallas</option>
-                                    <option value="precio">Precio</option>
-                                    <option value="color">Color</option>
-                                </select>
-                            </div>
-                            <div id="filtro-precio" class="form-group d-none">
-                                <label for="precio_min">Precio Mínimo</label>
-                                <input type="number" class="form-control" id="precio_min" name="precio_min" placeholder="0">
-                                <label for="precio_max">Precio Máximo</label>
-                                <input type="number" class="form-control" id="precio_max" name="precio_max" placeholder="1000">
-                            </div>
-                            <div id="filtro-tallas" class="form-group d-none">
-                                <label for="talla">Tallas</label>
-                                <select class="form-control" id="talla" name="talla">
-                                    <option value="">Seleccione una talla</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                </select>
-                            </div>
-                            <div id="filtro-color" class="form-group d-none">
-                                <label>Color</label>
-                                <div class="d-flex justify-content-between">
-                                    <span class="color-option bg-primary"></span>
-                                    <span class="color-option bg-danger"></span>
-                                    <span class="color-option bg-success"></span>
-                                    <span class="color-option bg-warning"></span>
-                                    <span class="color-option bg-dark"></span>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-dark text-light mt-3">Aplicar Filtros</button>
-                        </form>
-                    </div>
-                    <a href="{% url 'ver_carro_de_arriendo' %}" class="list-group-item list-group-item-action btn btn-warning text-dark font-weight-bold">
-                        <i class="bi bi-gift"></i>Ofertas
-                    </a>                    
-                </div>
-            </aside>
-    
-            <main class="col-md-6 col-lg-8 px-5">
-                <h2 class="titulo text-center mt-3">Tienda "VIENTOS HELADOS"</h2>
-                
-                {% if messages %}
-                    <div class="alert alert-success" role="alert">
-                        {% for message in messages %}
-                            {{ message }}<br>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="row mt-4 justify-content-center"> 
-                    {% for producto in productos %}
-                    <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="{% static 'img/tabla_snowboard.png' %}" class="card-img-top" alt="Imagen del producto">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ producto.nombre_producto }}</h5>
-                                <p class="card-text">Precio: ${{ producto.precio_arriendo }}</p>
-                                <!-- Botón de detalle eliminado -->
-                                <button class="btn btn-dark btn-success mt-2" onclick="agregarAlCarrito('{{ producto.nombre_producto }}')">Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </main>
+    <!-- Enlace al CSS s -->
+    <link rel="stylesheet" href="{% static 'css/inventario_ventas.css' %}"> 
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-center">Inventario Arriendo</h3>
         </div>
-    </div>
+        <div class="card-body">
+            <!-- Tabla de Inventario de Arriendo -->
+            <div class="inventory-section">
+                <table id="rentalInventoryTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID de Producto</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad Disponible</th>
+                            <th>Talla Producto</th>
+                            <th>Precio de Arriendo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for InventarioArriendo in productos %}
+                        <tr>
+                            <td>{{ InventarioArriendo.id_producto }}</td>
+                            <td>{{ InventarioArriendo.nombre_producto }}</td>
+                            <td>{{ InventarioArriendo.cantidad_disponible }}</td>
+                            <td>{{ InventarioArriendo.talla_producto }}</td>
+                            <td>${{ InventarioArriendo.precio_arriendo|floatformat:0 }} CLP</td>
+                            <td>
+                                <form method="POST" action="{% url 'eliminar_producto_arriendo' InventarioArriendo.id_producto %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
+                                </form>  
+                                <button type="button" class="btn btn-warning" onclick="llenarModalDeEdicion(this)">Editar</button>                              
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
-    <!-- Modal de Confirmación -->
-    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalConfirmacionLabel">Producto añadido al carrito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    El producto ha sido añadido exitosamente a tu carrito.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <a href="{% url 'ver_carro_de_arriendo' %}" class="btn btn-primary">Ver Carrito</a>
+                <!-- Botones de Acción -->
+                <div class="button-group mt-4 text-right">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#rentalProductModal">Agregar Producto</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="button-group mt-5 text-right">
+        <a href="{% url 'inventario_ventas' %}" class="btn btn-primary">Inventario de Ventas</a>
+    </div>
+</section>
 
-    <footer class="footer">
-        <div class="container text-center">
-            <p><strong>Contacto:</strong><br>
-                Teléfono: 📞 +56923917032 <br>
-                Correo: ✉️ allsnowcl@gmail.com
-            </p>
+<!-- Modal para Agregar Productos de Arriendo -->
+<div class="modal fade" id="rentalProductModal" tabindex="-1" role="dialog" aria-labelledby="rentalProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentalProductModalLabel">Agregar Producto de Arriendo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addRentalProductForm" method="POST" action="{% url 'agregar_productos_arriendo' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombreProductoArriendo">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nombreProducto" name="nombre_producto" required>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="cantidadDisponibleArriendo">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidadDisponibleArriendo" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tallaProductoArriendo">Talla</label>
+                        <select class="form-control" id="tallaProductoArriendo" name="talla_producto" required>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="precioArriendo">Precio de Arriendo</label>
+                        <input type="number" class="form-control" id="precioArriendo" name="precio_arriendo" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto de Arriendo</button>
+                    </div>
+                </form>                
+            </div>
         </div>
-    </footer>
+    </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+<!-- Modal para Editar Productos de Arriendo -->
+<div class="modal fade" id="editRentalProductModal" tabindex="-1" role="dialog" aria-labelledby="editRentalProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRentalProductModalLabel">Editar Producto de Arriendo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editRentalProductForm" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="hidden" id="editRentalProductId" name="id_producto">
+                    <div class="form-group">
+                        <label for="editNombreProductoArriendo">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="editNombreProductoArriendo" name="nombre_producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCantidadDisponibleArriendo">Cantidad</label>
+                        <input type="number" class="form-control" id="editCantidadDisponibleArriendo" name="cantidad_disponible" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTallaProductoArriendo">Talla</label>
+                        <select class="form-control" id="editTallaProductoArriendo" name="talla_producto" required>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrecioArriendo">Precio de Arriendo</label>
+                        <input type="number" class="form-control" id="editPrecioArriendo" name="precio_arriendo" required step="1000" placeholder="Ingrese el precio en CLP">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-warning">Actualizar Producto de Arriendo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Mostrar filtros según la categoría seleccionada
-        function mostrarFiltros() {
-            const categoria = document.getElementById('categoria').value;
-            document.getElementById('filtro-precio').classList.add('d-none');
-            document.getElementById('filtro-tallas').classList.add('d-none');
-            document.getElementById('filtro-color').classList.add('d-none');
-    
-            if (categoria === 'precio') {
-                document.getElementById('filtro-precio').classList.remove('d-none');
-            } else if (categoria === 'tallas') {
-                document.getElementById('filtro-tallas').classList.remove('d-none');
-            } else if (categoria === 'color') {
-                document.getElementById('filtro-color').classList.remove('d-none');
-            }
-        }
 
-        function agregarAlCarrito(nombreProducto) {
-            $('#modalConfirmacion').modal('show');
-        }
-    </script>
-</body>
-</html>
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Script para manejar los eventos de edición y eliminación -->
+<script>
+    function llenarModalDeEdicion(button) {
+        var row = button.closest("tr"); // Encuentra la fila correspondiente
+        document.getElementById('editRentalProductId').value = row.cells[0].textContent.trim(); // ID de producto
+        document.getElementById('editNombreProductoArriendo').value = row.cells[1].textContent.trim(); // Nombre del producto
+        document.getElementById('editCantidadDisponibleArriendo').value = row.cells[2].textContent.trim(); // Cantidad disponible
+        document.getElementById('editTallaProductoArriendo').value = row.cells[3].textContent.trim(); // Talla
+        document.getElementById('editPrecioArriendo').value = row.cells[4].textContent.replace(/\D/g, '').trim(); // Precio
+        $('#editRentalProductModal').modal('show'); // Mostrar modal
+    }
+</script>
+
+
+{% endblock %}

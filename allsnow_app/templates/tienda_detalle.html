@@ -34,8 +34,8 @@
                 <h2 class="text-uppercase">Centro de Rental "{{ tienda.nombre_tienda }}"</h2>
                 <p>{{ tienda.descripcion }}</p>
                 <div class="d-flex mt-3">
-                    <a href="#" class="btn btn-primary mr-2">Comprar</a>
-                    <a href="#" class="btn btn-primary">Arrendar</a>
+                    <a href="{% url 'interfaz_compra' tienda.id_tienda %}" class="btn btn-primary mr-2">Comprar</a>
+                    <a href="{% url 'interfaz_arriendo' tienda.id_tienda %}" class="btn btn-primary">Arrendar</a>
                 </div>
             </div>
             <div class="col-md-4">

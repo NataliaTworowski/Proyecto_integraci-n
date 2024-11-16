@@ -14,15 +14,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Enlace al CSS -->
     <link rel="stylesheet" href="{% static 'css/interfaz_dueno.css' %}">
+    <!-- Incluir Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Establece el diseño con flexbox para que el footer esté al final */
         body {
             background-image: url("{% static 'img/fondodemontañas.png' %}");
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
-            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+            padding-top: 70px; /* Espacio para la barra de navegación */
         }
-    </style>
+        
+        /* Contenedor principal para contenido y footer */
+        .container {
+            flex: 1; /* Asegura que este contenido ocupe el espacio restante */
+        }
+        
+        /* Estilo para la barra de navegación superior */
+        .navbar {
+            background-color: #003366;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            height: 70px; /* Altura de la barra de navegación */
+        }
+        
+        /* Menú lateral ajustado */
+        .sidebar {
+            position: fixed;
+            top: 70px; /* Distancia desde la parte superior, debajo de la barra de navegación */
+            left: 0; /* Mueve el menú hacia la izquierda */
+            width: 200px; /* Ajusta el ancho del menú lateral a 200px */
+            height: auto; /* Ajusta la altura a contenido */
+            z-index: 100; /* Establece un índice de apilamiento para que no cubra otros elementos */
+            background-color: #f8f9fa; /* Color de fondo del menú */
+            margin-left: 0; /* Ajusta el margen a 0 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil para separar el menú del contenido */
+        }
+        
+        /* Ajustes para el contenido principal */
+        .main-content {
+            margin-left: 200px; /* Desplaza el contenido hacia la derecha para dejar espacio al menú lateral */
+            padding: 20px; /* Espaciado para que el contenido no se pegue al borde */
+            z-index: 1; /* Asegura que el contenido esté por encima del menú lateral */
+        }
+        
+        /* Estilos para el pie de página */
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: auto; /* Asegura que el pie de página se mantenga al final de la página */
+        }
+        
+        /* Estilos para el pie de página en el contenedor */
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 16px;
+        }
+        
+        .footer .container a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer .container a:hover {
+            text-decoration: underline;
+        }
+        
+</style>
 </head>
 <div class="container-fluid">
     <div class="row">
@@ -58,7 +130,43 @@
                 </p>
             </div>
         </main>
-        
+
+        <!-- Contenedor para el gráfico -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Gráfico de Ventas</h3>
+            </div>
+            <div class="card-body">
+                <canvas id="ventasChart" width="400" height="200"></canvas>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    // Datos del gráfico
+    var ctx = document.getElementById('ventasChart').getContext('2d');
+    var ventasChart = new Chart(ctx, {
+        type: 'bar', // Tipo de gráfico: barra
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'], // Etiquetas del eje X
+            datasets: [{
+                label: 'Ventas Mensuales',
+                data: [10, 25, 30, 15, 20, 40], // Datos de ventas
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+                borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
+                borderWidth: 1 // Grosor del borde
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Comienza el gráfico en cero
+                }
+            }
+        }
+    });
+</script>
+
 {% endblock %}
+</html>
